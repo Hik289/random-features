@@ -5,7 +5,7 @@
 </p>
 
 <p align="center">
-  <strong>Random-feature and deep GP experiments for scalable kernel learning.</strong>
+  <strong>Conference-style artifact for scalable random-feature kernel experiments.</strong>
 </p>
 
 <p align="center">
@@ -14,58 +14,70 @@
 
 ## Abstract
 
-This repository is a conference-style artifact for random-feature approximations for scalable kernel learning. It packages the code and notes needed to inspect the central research question: How accurately do random features approximate kernel and GP-style behavior at scale? The emphasis is on transparent entry points, reproducible execution, and clear separation between code, local data, and generated outputs.
+This repository is organized as a conference-style artifact for random-feature approximations for kernel learning. It is written for a reviewer or collaborator who wants to identify the exact entry points, understand the expected outputs, and reproduce the core evidence without reverse-engineering the folder layout. The central question is: **How accurately do random features approximate kernel and GP-style behavior at scale?**
+
+## Contribution Summary
+
+- Dataset and utility modules.
+- Deep GP random-feature implementation.
+- Experiment folders for approximation studies.
 
 ## Artifact at a Glance
 
 | Item | Details |
 | --- | --- |
 | Research question | How accurately do random features approximate kernel and GP-style behavior at scale? |
-| Primary artifact | Dataset helpers, random-feature models, losses, likelihoods, and experiments. |
+| Primary contribution | Dataset and utility modules; Deep GP random-feature implementation; Experiment folders for approximation studies |
 | Main entry points | `dgp_rff.py`, `dataset.py`, `experiments/`, `likelihoods/`, `losses/` |
-| Expected outputs | Approximation errors, uncertainty plots, and scalability diagnostics. |
+| Runtime | Python with NumPy, SciPy, scikit-learn, and Matplotlib |
+| Data expectation | Benchmark folds and local experiment inputs |
+| Expected evidence | Approximation errors, uncertainty plots, and scalability diagnostics |
 
 ## Repository Structure
 
 | Item | Details |
 | --- | --- |
-| `dataset.py` | dataset loading and preprocessing helpers. |
-| `dgp_rff.py` | deep GP random-feature implementation. |
-| `likelihoods/`, `losses/`, `mcmc/` | modeling components used by experiments. |
-| `experiments/` | experiment scripts and configuration points. |
-| `FOLDS/` | fold definitions or saved split assets. |
+| Entry points | `dgp_rff.py`, `dataset.py`, `experiments/`, `likelihoods/`, `losses/` |
+| Experiment assets | Benchmark folds and local experiment inputs |
+| Generated artifacts | Approximation errors, uncertainty plots, and scalability diagnostics |
+| Documentation role | README records the reproducibility protocol, reviewer-facing checks, and citation metadata |
 
 ## Reproducibility Protocol
 
-1. `git clone git@github.com:Hik289/random-features.git`
-2. `python -m venv .venv && source .venv/bin/activate`
-3. `python -m pip install -U pip numpy scipy scikit-learn matplotlib`
-4. Start from `experiments/`, then reuse `dataset.py` and `dgp_rff.py` for new benchmark runs.
-5. Record the data window, random seed, software versions, machine type, and exact command used for any full rerun.
-6. Store regenerated figures, tables, checkpoints, or reports under the existing result folders instead of overwriting raw inputs.
+1. Clone the repository: `git clone git@github.com:Hik289/random-features.git`.
+2. Prepare the runtime listed in **Artifact at a Glance**.
+3. Start from the main entry points rather than auxiliary folders.
+4. Run the smallest script or notebook first to verify local paths and package versions.
+5. Record the command, data window, random seed, machine type, and software versions for each full run.
+6. Store regenerated figures, logs, tables, checkpoints, or reports in named output folders so the original artifacts remain inspectable.
 
 ## Evaluation Protocol
 
-| Step | Reviewer-facing check |
+| Check | Expected reviewer action |
 | --- | --- |
-| Environment | Confirm the listed runtime or notebook environment starts without modifying tracked files. |
-| Minimal run | Execute the smallest entry point before launching longer experiments. |
-| Output check | Compare regenerated files with the expected figures, tables, logs, or reports named in this README. |
-| Extension check | Add new runs as separate scripts, notebooks, or result folders with explicit names. |
+| Entry-point clarity | Confirm the listed scripts or notebooks are the natural starting points. |
+| Minimal execution | Run a small case before attempting the full experiment. |
+| Output traceability | Map every regenerated output back to a command and data setting. |
+| Result inspection | Compare generated artifacts with the expected evidence listed above. |
+| Extension hygiene | Add new experiments as clearly named scripts, notebooks, or output folders. |
 
 ## Expected Results
 
-- The main scripts or notebooks should regenerate the project-specific artifacts listed in **Artifact at a Glance**.
-- Outputs should be traceable to a command, parameter setting, and data window.
-- Any private data path or machine-specific setting should be documented before sharing the artifact externally.
+A successful reproduction should produce or refresh the following evidence: Approximation errors, uncertainty plots, and scalability diagnostics. If local datasets or machine-specific paths are required, document those paths outside the committed code before sharing the artifact.
+
+## Known Limitations
+
+- Large datasets, private data paths, and machine-specific settings may need local configuration.
+- Some historical notebooks or scripts may reflect exploratory runs; prefer the entry points listed above for review.
+- For archival release, add a pinned environment file and a small public fixture when possible.
 
 ## Paper or Reference
 
-No external paper link is currently attached to this project. For now, the code, notebooks, and notes in this repository are the primary reference artifact.
+No external paper link is currently attached to this project. Cite the repository snapshot when using the artifact in academic work.
 
 ## Citation
 
-If this repository supports a paper, cite the paper first and the artifact version second. If no paper is attached, cite the repository snapshot used in the experiment.
+If a paper is attached, cite the paper first and this artifact second. Otherwise cite the repository snapshot used for the experiment.
 
 ```bibtex
 @misc{random_features_artifact_2026,
@@ -83,9 +95,9 @@ No explicit license file is included yet. Add one before public reuse, redistrib
 
 ## Reviewer Checklist
 
-| Claim | How to inspect it |
+| Claim | Inspection path |
 | --- | --- |
-| Code availability | Code and notebooks are present in the repository. |
-| Reproducibility | The protocol above gives the expected setup and run order. |
-| Result traceability | Generated outputs should live in named result, report, log, or output folders. |
-| Extensibility | New experiments should preserve existing artifacts and add clearly named outputs. |
+| Code availability | Core scripts, notebooks, and utilities are tracked in this repository. |
+| Reproducibility | The protocol above states setup, entry points, and output expectations. |
+| Data transparency | Local or private data dependencies should be documented before external release. |
+| Result traceability | Generated outputs should live in named result, report, log, checkpoint, or output folders. |
